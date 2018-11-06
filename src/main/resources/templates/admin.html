@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Admin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"/>
+
+
+</head>
+<body>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+
+
+
+<div class="container text-center mb-5">
+
+    <h3 class="my-4">Admin</h3>
+
+    <div class="row">
+
+        <div class="col-12 col-md my-auto">
+            <p th:text="${'Total scraped: ' + size}"></p>
+            <p th:text="${'Total pages: ' + pages}"></p>
+        </div>
+
+        <div class="col-12 col-md my-auto">
+            <p class="mb-1">Update hashtags</p>
+            <form th:action="@{/update-admin}" method="post" th:object="${searchTag}">
+                <input type="text" class="form-control mb-2 w-75 mx-auto" th:field="*{tag}" placeholder="#hashtag"/>
+                <button type="submit" class="btn btn-primary btn-block w-75 mx-auto">Update</button>
+            </form>
+        </div>
+
+    </div>
+
+
+
+    <h4 class="text-center mt-5">Completed</h4>
+    <div class="btn-group mt-4" role="group">
+        <a th:href="@{'/admin?page=' + ${prev}}"  role="button" class="btn btn-secondary">Prev</a>
+        <a th:href="@{'/admin?page=' + ${next}}"  role="button" class="btn btn-secondary">Next</a>
+    </div>
+
+
+    <div class="row mt-3">
+
+
+        <div class="col" th:each="hashtag : ${hashtags}">
+            <p class="mb-0">
+                <a th:href="${'/?' + hashtag.removeHash(hashtag.tag)}"  th:text="${'#' + hashtag.tag}"></a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="btn-group mt-4" role="group">
+        <a th:href="@{'/admin?page=' + ${prev}}"  role="button" class="btn btn-secondary">Prev</a>
+        <a th:href="@{'/admin?page=' + ${next}}"  role="button" class="btn btn-secondary">Next</a>
+    </div>
+
+
+</div>
+
+</body>
+</html>
